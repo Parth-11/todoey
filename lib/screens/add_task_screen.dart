@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey/model/task_data.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  AddTaskScreen(this.addTaskCallback);
-
   String newTaskTitle = '';
-  final Function addTaskCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,9 @@ class AddTaskScreen extends StatelessWidget {
             ),
             OutlinedButton(
               onPressed: () {
-                addTaskCallback(newTaskTitle);
+                Provider.of<TaskData>(context, listen: false)
+                    .addTask(newTaskTitle);
+                Navigator.pop(context);
               },
               style: const ButtonStyle(
                   backgroundColor:
